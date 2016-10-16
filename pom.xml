@@ -15,6 +15,11 @@
             <version>v1-rev72-1.22.0</version>
         </dependency>
         <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-vision</artifactId>
+            <version>v1-rev15-1.22.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.8</version>

@@ -21,16 +21,24 @@ public class Main {
     public static void main(String[] args) {
         try {
             HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-            Credential credential = GoogleCredential.fromStream(Main.class.getClassLoader().getResourceAsStream("client-secrets.json"))
-                    .createScoped(Collections.singleton(StorageScopes.CLOUD_PLATFORM));
             JsonFactory jsonFactory = new JacksonFactory();
+            Credential credential = GoogleCredential
+                    .fromStream(
+                            Main.class.getClassLoader()
+                                    .getResourceAsStream("client-secrets.json")) // 1
+                    .createScoped(Collections.singleton(StorageScopes.CLOUD_PLATFORM)); // 2
 
-            Storage storage = new Storage.Builder(httpTransport, jsonFactory, credential).setApplicationName("Test project").build();
-            storage.buckets().list("blog-test").execute().getItems().forEach(i -> System.out.println(i.getName()));
+            Storage storage = new Storage.Builder(httpTransport, jsonFactory, credential)
+                    .setApplicationName("Test project")  // 3
+                    .build();
+
+            storage.buckets()
+                    .list("blog-test")
+                    .execute()
+                    .getItems()
+                    .forEach(i -> System.out.println(i.getName())); // 4
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
